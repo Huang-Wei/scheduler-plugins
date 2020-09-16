@@ -25,7 +25,6 @@ import (
 
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
-
 	config "sigs.k8s.io/scheduler-plugins/pkg/apis/config"
 )
 
@@ -49,6 +48,8 @@ func autoConvert_v1beta1_CoschedulingArgs_To_config_CoschedulingArgs(in *Cosched
 	out.PermitWaitingTimeSeconds = (*int64)(unsafe.Pointer(in.PermitWaitingTimeSeconds))
 	out.PodGroupGCIntervalSeconds = (*int64)(unsafe.Pointer(in.PodGroupGCIntervalSeconds))
 	out.PodGroupExpirationTimeSeconds = (*int64)(unsafe.Pointer(in.PodGroupExpirationTimeSeconds))
+	out.KubeMaster = in.KubeMaster
+	out.KubeConfig = in.KubeConfig
 	return nil
 }
 
@@ -61,6 +62,8 @@ func autoConvert_config_CoschedulingArgs_To_v1beta1_CoschedulingArgs(in *config.
 	out.PermitWaitingTimeSeconds = (*int64)(unsafe.Pointer(in.PermitWaitingTimeSeconds))
 	out.PodGroupGCIntervalSeconds = (*int64)(unsafe.Pointer(in.PodGroupGCIntervalSeconds))
 	out.PodGroupExpirationTimeSeconds = (*int64)(unsafe.Pointer(in.PodGroupExpirationTimeSeconds))
+	out.KubeMaster = in.KubeMaster
+	out.KubeConfig = in.KubeConfig
 	return nil
 }
 

@@ -33,4 +33,8 @@ type CoschedulingArgs struct {
 	// If the deleted PodGroup stays longer than the PodGroupExpirationTime,
 	// the PodGroup will be deleted from PodGroupInfos.
 	PodGroupExpirationTimeSeconds *int64 `json:"podGroupExpirationTimeSeconds,omitempty"`
+	// KubeMaster is the url of api-server
+	KubeMaster string `json:"kubeMaster,omitempty"`
+	// KubeConfig for scheduler
+	KubeConfig string `json:"kubeConfig,omitempty"`
 }

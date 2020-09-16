@@ -5,26 +5,26 @@ leaderElection:
 clientConnection:
   kubeconfig: "REPLACE_ME_WITH_KUBE_CONFIG_PATH"
 profiles:
-- schedulerName: default-scheduler
-  plugins:
-    queueSort:
-      enabled:
+  - schedulerName: default-scheduler
+    plugins:
+      queueSort:
+        enabled:
         - name: Coscheduling
-      disabled:
+        disabled:
         - name: "*"
-    preFilter:
-      enabled:
+      preFilter:
+        enabled:
         - name: Coscheduling
-    permit:
-      enabled:
+      permit:
+        enabled:
         - name: Coscheduling
-    reserve:
-      enabled:
+      reserve:
+        enabled:
         - name: Coscheduling
-# optional plugin configs
-  pluginConfig: 
-  - name: Coscheduling
-    args:
-      permitWaitingTimeSeconds: 10
-      podGroupGCIntervalSeconds: 30
-      podGroupExpirationTimeSeconds: 600
+    # optional plugin configs
+    pluginConfig:
+    - name: Coscheduling
+      args:
+        permitWaitingTimeSeconds: 10
+        podGroupGCIntervalSeconds: 30
+        podGroupExpirationTimeSeconds: 600
