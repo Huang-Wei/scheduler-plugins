@@ -59,6 +59,7 @@ type Manager interface {
 	AddDeniedPodGroup(string)
 	DeletePermittedPodGroup(string)
 	CalculateAssignedPods(string, string) int
+	SiblingPods(pod *corev1.Pod) []*corev1.Pod
 }
 
 // PodGroupManager defines the scheduling operation called
@@ -100,6 +101,13 @@ func NewPodGroupManager(pgClient pgclientset.Interface, snapshotSharedLister fra
 		permittedPG:                gochache.New(3*time.Second, 3*time.Second),
 	}
 	return pgMgr
+}
+
+func (pgMgr *PodGroupManager) SiblingPods(pod *corev1.Pod) []*corev1.Pod {
+	pods, _ := pgMgr.podLister.Pods(pod.Namespace).List(
+		labels.SelectorFromSet(labels.Set{util.PodGroupLabel: util.GetPodGroupLabel(pod)}),
+	)
+	return pods
 }
 
 // PreFilter filters out a pod if it
